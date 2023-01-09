@@ -1,0 +1,10 @@
+.husky/_/
+.vscode/
+node_modules/
+dist/
+.editorconfig
+.eslintrc.json
+.prettierignore
+.prettierrc
+.nvmrc
+nodemon.json

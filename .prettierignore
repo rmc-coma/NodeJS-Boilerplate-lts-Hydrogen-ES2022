@@ -1,0 +1,10 @@
+node_modules/
+.nyc_output
+coverage/
+dist/
+build/
+tests/fixtures/
+license
+package-lock.json
+README.md
+DS_Store

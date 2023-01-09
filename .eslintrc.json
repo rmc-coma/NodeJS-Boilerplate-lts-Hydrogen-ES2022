@@ -1,0 +1,77 @@
+{
+    "env": {
+        "es6": true,
+        "worker": true,
+        "node": true,
+        "es2022": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:prettier/recommended",
+        "plugin:jest/recommended",
+        "plugin:jest/style"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
+    },
+    "ignorePatterns": [
+        "node_modules",
+        "dist",
+        "build",
+        ".vscode",
+        ".husky",
+        "coverage",
+        "*.config.js"
+    ],
+    "plugins": ["@typescript-eslint", "prettier", "jest"],
+    "rules": {
+        "prettier/prettier": [
+            "warn",
+            {
+                "printWidth": 92 // Needs to be synchronized with .editorconfig for some reason
+            }
+        ],
+        "sort-imports": [
+            "warn",
+            {
+                "ignoreCase": false,
+                "ignoreDeclarationSort": true,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+                "allowSeparatedGroups": false
+            }
+        ],
+        "no-shadow": "off",
+        "arrow-body-style": "off",
+        "prefer-arrow-callback": "off",
+        "require-await": "off",
+        "require-yield": "warn",
+        "curly": "warn",
+        "no-fallthrough": "warn",
+        "no-return-await": "warn",
+        "no-void": ["error"],
+        "no-shadow-restricted-names": "error",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/return-await": ["warn", "in-try-catch"],
+        "@typescript-eslint/require-await": "warn",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_*$"
+            }
+        ],
+        "@typescript-eslint/no-shadow": "error"
+    },
+    "reportUnusedDisableDirectives": true
+}
