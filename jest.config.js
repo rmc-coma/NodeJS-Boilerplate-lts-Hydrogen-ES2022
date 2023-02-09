@@ -1,24 +1,40 @@
 const fs = require("fs");
 
+const fileExtensions = [
+    "ts",
+    "tsx",
+    "mts",
+    "cts",
+    "js",
+    "jsx",
+    "mjs",
+    "cjs",
+    "node",
+    "json",
+];
+
 /** @type {Partial<import('@jest/types').Config.ProjectConfig>} */
 const commonProjectsConfig = {
     moduleDirectories: ["node_modules"],
-    moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "mjs", "cjs", "node"],
+    moduleFileExtensions: fileExtensions,
     moduleNameMapper: fs
         .readdirSync("./src/", { withFileTypes: true })
         .reduce((map, file) => {
             if (file.isDirectory()) {
                 map[`^${file.name}/(.*)$`] = `<rootDir>/src/${file.name}/$1`;
-            } else if (
-                ["ts", "tsx", "js", "jsx", "json", "mjs", "cjs", "node"].find(item =>
-                    file.name.endsWith(`.${item}`)
-                )
-            ) {
+            } else if (fileExtensions.find(item => file.name.endsWith(`.${item}`))) {
                 const fileName = file.name.slice(0, file.name.lastIndexOf("."));
                 map[`^${fileName}$`] = `<rootDir>/src/${fileName}`;
             }
             return map;
         }, Object.create(null)),
+    modulePathIgnorePatterns: [
+        "<rootDir>/build",
+        "<rootDir>/dist",
+        "<rootDir>/.husky",
+        "<rootDir>/.vscode",
+        "<rootDir>/coverage",
+    ],
     rootDir: "./",
     roots: ["<rootDir>/", "<rootDir>/src/"],
     testEnvironment: "node",
@@ -32,39 +48,17 @@ module.exports = {
     projects: [
         {
             displayName: "unit",
-            testMatch: [
-                "<rootDir>/src/modules/**/__tests__/**/unit/**/*.(spec|test).[tj]s?(x)",
-            ],
+            testMatch: ["<rootDir>/src/**/__tests__/**/unit/**/*.(spec|test).[tj]s?(x)"],
         },
         {
             displayName: "integration",
             testMatch: [
-                "<rootDir>/src/modules/**/__tests__/**/integration/**/*.(spec|test).[tj]s?(x)",
+                "<rootDir>/src/**/__tests__/**/integration/**/*.(spec|test).[tj]s?(x)",
             ],
         },
         {
             displayName: "e2e",
-            testMatch: [
-                "<rootDir>/src/modules/**/__tests__/**/e2e/**/*.(spec|test).[tj]s?(x)",
-            ],
-        },
-        {
-            displayName: "tools:unit",
-            testMatch: [
-                "<rootDir>/src/tools/**/__tests__/**/unit/**/*.(spec|test).[tj]s?(x)",
-            ],
-        },
-        {
-            displayName: "tools:integration",
-            testMatch: [
-                "<rootDir>/src/tools/**/__tests__/**/integration/**/*.(spec|test).[tj]s?(x)",
-            ],
-        },
-        {
-            displayName: "tools:e2e",
-            testMatch: [
-                "<rootDir>/src/tools/**/__tests__/**/e2e/**/*.(spec|test).[tj]s?(x)",
-            ],
+            testMatch: ["<rootDir>/src/**/__tests__/**/e2e/**/*.(spec|test).[tj]s?(x)"],
         },
     ].map(obj => ({ ...commonProjectsConfig, ...obj })),
     cache: false,
@@ -72,7 +66,9 @@ module.exports = {
     passWithNoTests: true,
     collectCoverage: true,
     collectCoverageFrom: [
-        "**/*.{js,jsx,ts,tsx}",
+        "**/*.{ts,tsx,mts,cts,js,jsx,mjs,cjs,node}",
+        "!**/*.d.{ts,tsx,mts,cts}",
+        "!**/*.config.*",
         "!**/node_modules/**",
         "!**/.husky/**",
         "!**/.vscode/**",
@@ -80,7 +76,7 @@ module.exports = {
         "!**/coverage/**",
         "!**/__tests__/**",
         "!**/__mocks__/**",
-        "!jest.config.js",
+        "!**/index.*",
     ],
     coverageDirectory: "<rootDir>/coverage",
     verbose: true,
