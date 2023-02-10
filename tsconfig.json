@@ -100,5 +100,5 @@
         "skipDefaultLibCheck": true
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "**/node_modules/**", "coverage", "dist"]
+    "exclude": ["node_modules/**/*", "**/node_modules/**/*", "coverage/**/*", "dist/**/*"]
 }
