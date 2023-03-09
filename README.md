@@ -14,3 +14,4 @@ Features :
 - ESlint config extended by prettier plugin so that the two operate in harmony
 - ESBuild for lightning fast building
 - Many provided commands for building, debugging, linting, formatting, etc...
+- tsc-files to type check only the linted ts files and their imports

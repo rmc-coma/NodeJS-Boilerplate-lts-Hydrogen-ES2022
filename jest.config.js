@@ -27,7 +27,7 @@ const commonProjectsConfig = {
                 map[`^${fileName}$`] = `<rootDir>/src/${fileName}`;
             }
             return map;
-        }, Object.create(null)),
+        }, {}),
     modulePathIgnorePatterns: [
         "<rootDir>/build",
         "<rootDir>/dist",

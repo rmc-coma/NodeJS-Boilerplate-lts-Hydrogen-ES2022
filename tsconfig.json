@@ -99,6 +99,5 @@
         "skipLibCheck": false /* Skip type checking all .d.ts files. */,
         "skipDefaultLibCheck": true
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules/**/*", "**/node_modules/**/*", "coverage/**/*", "dist/**/*"]
+    "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.tsx", "src/**/*.jsx"]
 }

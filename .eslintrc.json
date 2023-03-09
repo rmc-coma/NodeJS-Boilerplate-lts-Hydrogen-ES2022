@@ -19,16 +19,16 @@
     "parserOptions": {
         "ecmaVersion": 2022,
         "sourceType": "module",
-        "project": ["./tsconfig.json"]
+        "project": ["./tsconfig.eslint.json"]
     },
     "ignorePatterns": [
         "node_modules",
         "dist",
         "build",
+        "public",
         ".vscode",
         ".husky",
-        "coverage",
-        "*.config.js"
+        "coverage"
     ],
     "plugins": ["@typescript-eslint", "prettier", "jest"],
     "rules": {
